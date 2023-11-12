@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 
+
 export function useHome () {
     const [mode, setMode] = useState("Dark")
     function tooglethem(){
@@ -8,6 +9,5 @@ export function useHome () {
         setMode(`${mode === 'Dark'?'Light':'Dark'}`)
         console.log(mode)
       }
-
  return {tooglethem,mode}    
 }
