@@ -1,6 +1,4 @@
 .homecom{
-    display: flex;
-    flex-wrap: wrap;
     height: auto;
     min-height: 800px;
     width: 100%;
@@ -9,8 +7,6 @@
     padding: 80px 40px 0px 40px;
 }
 .mainbox{
-    display: flex;
-    flex-wrap: wrap;
     width:100%;
     height: 350px;
     margin-bottom: 4px;
