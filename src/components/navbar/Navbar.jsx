@@ -5,20 +5,22 @@ import Login from '../feature/login/Login'
 import Signup from '../feature/signup/Signup'
 import { useNav } from '../../hooks/useNav'
 import {useSelector,useDispatch} from 'react-redux'
-import {getUser} from '../feature/user/userSlicer'
+import {getUser,getCart} from '../feature/user/userSlicer'
 const userDetails = localStorage.getItem('user')
 import { useLogin } from '../../hooks/login/useLogin'
 import { useHome } from '../../hooks/home/useHome'
 
-
 const Navbar = () => {
+
+
   const {handleLogin,handleSignup,logincross,signupcropss} = useNav()
   const {tooglethem,mode} = useHome()
-  const {user} = useSelector((state)=>state.user)
+  const {user,sum} = useSelector((state)=>state.user)
   const dispatch = useDispatch()
   const {handleLogout} = useLogin()
   useEffect(() => {
     dispatch(getUser(JSON?.parse(userDetails)))
+    
   }, [])
   
 
@@ -36,11 +38,11 @@ const Navbar = () => {
           <NavLink className='xl:text-xl hover:text-gray-400 ml-[10px]'>Search</NavLink>
 
         {user ?
-         <div className='xl:text-xl ml-2 flex'><div>{user.name}</div><div><li className='text-xl hover:text-gray-400 ml-[10px]' onClick={handleLogout}>Logout</li></div></div>:
+         <div className='xl:text-xl ml-2 flex'><div>{user.name.charAt(0).toUpperCase() + user.name.slice(1)}</div><div><li className='text-xl hover:text-gray-400 ml-[10px]' onClick={handleLogout}>Logout</li></div></div>:
 
         <div className='flex'><div><li className="xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer" onClick={handleLogin} >Login</li></div><div><li className='xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer' onClick={handleSignup}>Signup</li></div></div>}
 
-          <li className='xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer'>Cart</li>
+          <li className='xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer'>Cart<span>({sum})</span></li>
           
           <li>{mode === "Dark" ? < i className="ri-sun-line ml-2 cursor-pointer" onClick={tooglethem}></i>: <i className="ri-moon-line ml-2 cursor-pointer"  onClick={tooglethem}></i>}</li>
         </ul>

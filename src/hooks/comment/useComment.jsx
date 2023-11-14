@@ -2,55 +2,49 @@ import {useSelector} from 'react-redux'
 import { useState,useEffect} from 'react'
 import axios from 'axios'
 
-export function useComment ({ProductID}) {
-    console.log('product',ProductID)
+export function useComment (ProductID,datacomment,dispatchComment,dataReply,dispatchReply) {  
+    // console.log(dataReply)  
     const {baseurl,user} = useSelector((state)=>state.user)
-    const [comment, setComment] = useState('')
     const [commentData, setCommentData] = useState('')
-    const [replyData, setReplyData] = useState('')
     const [replyCommentData, setReplyCommentData] = useState('')
     // console.log('comment', commentData)
-    const [handle, setHandle] = useState(false)
-    const [handleReply,setHandleReply] = useState(false)
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
+        
         // console.log('ok')
         const data = {
-            comment: comment,
+            comment: datacomment.comment,
             user: parseInt(user?.id),
-            product: parseInt(ProductID)
+            product: parseInt(ProductID.ProductID)
         }
-        // console.log(data)
+        // console.log('datanew',data)
         try {
             const response = await axios.post(`${baseurl}blogcomment/`, data)
             const res = response.data
             // console.log(res)
-            setHandle(true)
+            blogcomment()
         } catch (error) {
             console.log(error)
         }
-        setComment('')
+        dispatchComment({type:"COMMENT",value:""})
     }
 
     useEffect(() => {
         blogcomment()
-    }, [handle,handleReply])
-
-   
+    }, [])
 
     const blogcomment = async () => {
         try {
-            const response = await axios.get(`${baseurl}blogcommentview/${ProductID}`)
+            const response = await axios.get(`${baseurl}blogcommentview/${ProductID?.ProductID}`)
             const res = response.data
-            console.log(res)
+            // console.log(res)
             let dataitem = []
             for (let data in res) {
                 dataitem.push(res[data])
             }
-            console.log(dataitem)
-            console.log('data0', dataitem[0])
-            console.log('data1', dataitem[1])
+            // console.log('data0', dataitem[0])
+            // console.log('data1', dataitem[1])
             // // console.log(dataitem[1][0])
             setCommentData(dataitem[0])
             setReplyCommentData(dataitem[1][0])
@@ -60,34 +54,30 @@ export function useComment ({ProductID}) {
         }
     }
 
-    const handleReplySubmit = (e) => {
-        e.preventDefault()
-        // console.log('ok')
-    }
-    // blogcomment()
 
-    const handleClick = async (e) => {
-        console.log(e.target.id, replyData)
-        // const userId = localStorage.getItem('UserId')
-        // const id = localStorage.getItem("ProductID")
-        const parent = parseInt(e.target.id)
+    const handleReplySubmit = async (e,commentid) => {
+        console.log(commentid, dataReply?.replyComment,)
+ 
+        e.preventDefault()
+        const parent = parseInt(commentid)
         const data = {
-            comment: replyData,
+            comment: dataReply?.replyComment,
             user: parseInt(user?.id),
-            product: parseInt(),
+            product: parseInt(ProductID.ProductID),
             parent: parent
         }
+        console.log('datareply',data)
         try {
             const response = await axios.post(`${baseurl}blogreply/`, data)
             const res = response.data
-            // console.log(res)
-            setHandleReply(true)
+            console.log(res)
+            blogcomment()
 
         } catch (error) {
             console.log(error)
         }
-        setReplyData('')
+        dispatchReply({type : "REPLYCOMMENT",value : ""})
 
     }
-    return {handleCommentSubmit,commentData,replyCommentData}
+    return {handleCommentSubmit,commentData,replyCommentData,handleReplySubmit}
 }

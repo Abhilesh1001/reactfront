@@ -10,6 +10,8 @@ import QuickView from './components/quickview/QuickView'
 
 function App() {
 
+  
+
   return (
     <div className='flex-col bg-gray-100   dark:bg-black dark:text-white h-min-[400px] h-auto fontfam'>
       <BrowserRouter >

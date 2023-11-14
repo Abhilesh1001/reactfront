@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useSelector } from 'react-redux';
 import {NavLink} from  'react-router-dom'
+import AddCart from '../../../addcart/AddCart';
 
 
 const HomeCarousel = () => {
@@ -21,7 +22,7 @@ const HomeCarousel = () => {
   };
 
   return (
-    <div className='mt-2'>
+    <div className='mt-2 mb-6'>
         {loading &&
             Object?.keys(data)?.map((cat,index)=>{
                 // console.log(cat)
@@ -29,7 +30,7 @@ const HomeCarousel = () => {
                     <div className='text-4xl mt-4 mb-4 ml-2'><b>{cat}</b></div>
                     <Slider {...settings}>
                     {data[cat]?.map((item,indexs)=>{
-                        // console.log(item)x
+                        // console.log(item)
                         const ImageUrl  = `${baseurl}${item?.image}` 
                         return <div key={indexs} className='h-450px  dark:bg-gray-800 bg-slate-200 rounded'>
                            <div className='h-56 flex justify-center items-center rounded-t-xl'>
@@ -41,7 +42,14 @@ const HomeCarousel = () => {
                     <div className='mb-4'>{item?.desc}</div>
                     </div>
                     <div className='flex justify-between ml-2 mr-2 mb-4'> 
-                    <button className='bg bg-slate-50 p-2 rounded cursor-pointer dark:bg-black'>Add to Cart</button>
+
+                    <div className='rounded'>
+                      
+                      <AddCart id = {item?.product_id} name = {item?.product_name} price = {item?.price}  />
+                      
+                      </div>
+
+
                     <NavLink to={`/QuivkView/${item?.product_id}`}><button className='bg bg-slate-50 p-2 rounded cursor-pointer dark:bg-black'>Quick View</button></NavLink>
                     </div>
 

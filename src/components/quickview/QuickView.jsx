@@ -9,19 +9,22 @@ const QuickView = () => {
     const { id } = useParams()
     const {baseurl} = useSelector((state)=>state.user)
     const { data, error, isLoading }= useGetSingleProdQuery(id)
-    console.log('data',data)
+    // console.log('data',data)
 
     return (
-
         <div className='homecom'>
             <div className='margin'>
-              <div className='flex bg-green-50 w-full flex-wrap h-[600px] overflow-auto mt-6'>
-                <div className='w-[400px] h-[400px] bg-green-200 m-4 fixed'>
-                  <img src={`${baseurl}${data?.image}`} className='w-full h-[90%]'  alt="" />
+              <div className='flex w-full flex-wrap h-auto  mt-6'>
+                <div className='w-[400px] h-[500px]  m-4 fixed '>
+                  <img src={`${baseurl}${data?.image}`} className='w-full h-[80%] rounded-xl'  alt="" />
+                  <div className='flex w-full justify-between p-4'>
+                  <button className=' bg-slate-300  dark:bg-gray-800 p-2 rounded'>Buy Now</button>
+                  <button className=' bg-slate-300  dark:bg-gray-800 p-2 rounded'>Add to cart</button>
+                  </div>
                 </div>
                 <div className='w-[400px] h-[400px] m-4'></div>
-                <div className='w-[900px] h-[200px] bg-green-400 mt-4 pl-4' >
-                  <div className='fixed bg-white w-[60%] p-2 z-10 rounded'>
+                <div className='w-[900px] h-[200px] mt-4 pl-4' >
+                  <div className=' w-[60%] p-2 z-10 rounded'>
                   <div className='text-3xl'>{data?.product_name}</div>
                   <div className='text-xl'>Rs : {data?.price}</div>
                   <div className='text-xl'>{data?.desc}</div>
