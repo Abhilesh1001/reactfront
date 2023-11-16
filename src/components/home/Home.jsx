@@ -9,6 +9,7 @@ import Slider from "react-slick";
 import HomeCarousel from './product/homeCarousel/HomeCarousel'
 
 
+
 const Home = () => {
     const {data} = useHomePro()
     const {baseurl} = useSelector((state)=>state.user)

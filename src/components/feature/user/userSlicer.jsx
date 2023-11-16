@@ -31,7 +31,6 @@ export const userSlice = createSlice({
       }
       state.totalSum = Object.values(state.cart).reduce((acc, item) => acc + (item.qty * item.price), 0);
       state.sum = Object.values(state.cart).reduce((acc, item) => acc + item.qty, 0);
-      
       localStorage.setItem('cart', JSON.stringify(state.cart));
       localStorage.setItem('totalSum',state.totalSum)
       localStorage.setItem('sum',state.sum)
@@ -44,19 +43,38 @@ export const userSlice = createSlice({
       if(state.cart[id].qty===0){
         delete state.cart[id]
       }
-
       state.totalSum = Object.values(state.cart).reduce((acc, item) => acc + (item.qty * item.price), 0);
       state.sum = Object.values(state.cart).reduce((acc, item) => acc + item.qty, 0);
-
       localStorage.setItem('cart', JSON.stringify(state.cart));
       localStorage.setItem('totalSum',state.totalSum)
       localStorage.setItem('sum',state.sum)
     },
+    getSum : (state,action) =>{
+      state.sum = action.payload
+
+    },
+    getTotalSum : (state,action) =>{
+      state.totalSum = action.payload
+
+    },
+    getCartData : (state,action)=>{
+      state.cart = action.payload
+      state.totalSum = Object.values(state.cart).reduce((acc, item) => acc + (item.qty * item.price), 0);
+      state.sum = Object.values(state.cart).reduce((acc, item) => acc + item.qty, 0);
+      localStorage.setItem('cart', JSON.stringify(state.cart));
+      localStorage.setItem('totalSum',state.totalSum)
+      localStorage.setItem('sum',state.sum)
+    },
+    getEmptyData : (state,action) =>{
+      state.cart = action.payload
+    },
+    
+
 
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { getUser,getLoginCross,getSignupCross,getCart,getRemove } = userSlice.actions
+export const { getUser,getLoginCross,getSignupCross,getCart,getRemove,getSum,getCartData,getEmptyData,getTotalSum } = userSlice.actions
 
 export default userSlice.reducer

@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const {handleLogin,handleSignup,logincross,signupcropss} = useNav()
   const {tooglethem,mode} = useHome()
-  const {user,sum} = useSelector((state)=>state.user)
+  const {user,sum} = useSelector((state)=>state.user) 
   const dispatch = useDispatch()
   const {handleLogout} = useLogin()
   useEffect(() => {
@@ -31,18 +31,18 @@ const Navbar = () => {
          <NavLink className='xl:text-3xl ml-[10px] md:text-2xl'>AbhileshCart</NavLink>
           <NavLink to={"/"} className='xl:text-xl hover:text-gray-400 ml-[6px]' >Home</NavLink>
           <NavLink className='xl:text-xl hover:text-gray-400 ml-[6px]'>Tracker</NavLink>
-          <NavLink className='xl:text-xl hover:text-gray-400 ml-[6px]'>ContactUs</NavLink>
-          <NavLink className='xl:text-xl hover:text-gray-400 ml-[6px]'>Dropdown</NavLink>
+          <NavLink to={"/contact"} className='xl:text-xl hover:text-gray-400 ml-[6px]'>ContactUs</NavLink>
+          <NavLink className='xl:text-xl hover:text-gray-400 ml-[6px]'>Dropdown <i className="ri-arrow-drop-down-line"></i></NavLink>
           <input type='text' className='p-1 rounded  md:ml-[40px] md:w-[150px]  xl:ml-[60px] xl:w-[300px] dark:bg-slate-600 ' />
           {/* <div><i className="ri-search-line bg-white p-2"></i></div> */}
           <NavLink className='xl:text-xl hover:text-gray-400 ml-[10px]'>Search</NavLink>
 
         {user ?
-         <div className='xl:text-xl ml-2 flex'><div>{user.name.charAt(0).toUpperCase() + user.name.slice(1)}</div><div><li className='text-xl hover:text-gray-400 ml-[10px]' onClick={handleLogout}>Logout</li></div></div>:
+         <div className='xl:text-xl ml-2 flex'><div>{user.name.charAt(0).toUpperCase() + user.name.slice(1)}</div><div><li className='text-xl hover:text-gray-400 ml-[10px] cursor-pointer' onClick={handleLogout}>Logout</li></div></div>:
 
         <div className='flex'><div><li className="xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer" onClick={handleLogin} >Login</li></div><div><li className='xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer' onClick={handleSignup}>Signup</li></div></div>}
 
-          <li className='xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer'>Cart<span>({sum})</span></li>
+          <NavLink to={"/cart"} className='xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer'>Cart<span>({sum})</span></NavLink>
           
           <li>{mode === "Dark" ? < i className="ri-sun-line ml-2 cursor-pointer" onClick={tooglethem}></i>: <i className="ri-moon-line ml-2 cursor-pointer"  onClick={tooglethem}></i>}</li>
         </ul>
