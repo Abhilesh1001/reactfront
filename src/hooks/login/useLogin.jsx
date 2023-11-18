@@ -23,7 +23,8 @@ export const useLogin = (data, dispatch) => {
       disptch(getUser(null))
       disptch(getTotalSum(0))
       disptch(getEmptyData({}))
-    }, 120000);
+      alert('Your session has expired please login again')
+    }, 1200000);
 
     try {
       setLoading(true)

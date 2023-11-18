@@ -1,14 +1,28 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './style.css'
 import { useHomePro } from '../../hooks/home/useHomePro'
+import {useReducer} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AddCart from './AddCart'
+import {initialState,reducer}  from  '../reducer/placeorderreducer'
+import { usePlaceOreder } from '../../hooks/cart/usePlaceOrder'
+import useWindowWidth from '../../hooks/useWindowWidth'
 
 
 const Cart = () => {
+  const [click,setClick] = useState("null")
   const { data } = useHomePro()
+  const [dataredu,dispatch] = useReducer(reducer,initialState)
+  const {width,height} = useWindowWidth()
+  console.log(width,height)
+  const {handleSubmit} = usePlaceOreder(dataredu)
+  const handlePlace =() =>{
+       setClick(`${click==="click"?"null":"click"}`)
+  }
+
   const { cart, baseurl, sum, totalSum } = useSelector((state) => state.user)
   const reqData = data?.filter((items) => {
+
     for (let item of Object.keys(cart)) {
       if (parseInt(item) === items.product_id) {
         return items  
@@ -49,17 +63,64 @@ const Cart = () => {
             </div>
           </div>
           <div>
-            <div className='bg-white w-[500px] h-[210px] ml-4 fixed dark:bg-gray-600'>
+
+            <div className='bg-white w-[650px] rounded h-auto ml-4  dark:bg-gray-600'>
               <div className='m-2 w-[95%] rounded p-1 text-xl flex item-center justify-center bg-slate-300 dark:bg-gray-800'>Price Details</div>
               <div className='ml-2 rounded p-2 bg-slate-300 dark:bg-gray-800 w-[95%]'>
                 <div className='text-xl' >Price({sum}) : Rs.  {totalSum}</div>
                 {/* <div>Discount </div> */}
                 <div className='text-xl'>Total Amount : Rs. {totalSum}</div>
                 <div>You will save  :Rs . 0 Amount</div>
-                <button className='bg-white p-2 rounded mt-2 text-xl dark:bg-black'>Place Order</button>
-              </div>
 
+                <button className='bg-white p-2 rounded mt-2 text-xl dark:bg-black' onClick={handlePlace}>Place Order</button>
+                { click==="click" &&<div>
+                   <div>
+                       <form action="" className='text-xl' onSubmit={handleSubmit}>
+                            <div className='my-2 flex flex-col '>
+                            <label htmlFor="name">Name :</label>
+                            <input type="text"  className='rounded p-1 dark:bg-slate-600' onChange={(e)=>dispatch({type:"NAME",value:e.target.value})}/>
+                            </div>
+                            <div className='my-2 flex flex-col  '>
+                            <label htmlFor="Address">Address</label>
+                            <input type="text" className='rounded p-1 dark:bg-slate-600' onChange={(e)=>dispatch({type:"ADDRESS",value:e.target.value})} />
+                            </div>
+                            <div className='my-2  flex'>
+                              <div>
+                            <label htmlFor="Address2">Address2</label>
+                            <input type="text" className='rounded p-1 dark:bg-slate-600' onChange={(e)=>dispatch({type:"ADDRESS2",value:e.target.value})} />
+                              </div>
+                              <div>
+                            <label htmlFor="City">City</label>
+                            <input type="text" className='rounded p-1 dark:bg-slate-600' onChange={(e)=>dispatch({type:"CITY",value:e.target.value})} />
+
+                              </div>
+                            </div >
+                            <div className='my-2 flex'>
+                              <div className=''>
+                            <label htmlFor="State">State</label>
+                            <input type="text" className='rounded p-1 dark:bg-slate-600' onChange={(e)=>dispatch({type:"STATE",value:e.target.value})} />
+                              </div>
+                              <div className='mr-10'>
+                            <label htmlFor="Zip">Zip</label>
+                            <input type="text" className='rounded p-1 dark:bg-slate-600' onChange={(e)=>dispatch({type:"ZIP",value:e.target.value})} />
+                              </div>
+                            </div>
+                            <div className='my-2 flex flex-col  '>
+                            
+                            </div>
+                            <div className='my-2 flex flex-col'>
+                            <label htmlFor="phone">Phone Number</label>
+                            <input type="text" className='rounded p-1 dark:bg-slate-600' onChange={(e)=>dispatch({type:"PHONE",value:e.target.value})} />
+                            </div>
+                            <div className='mb-2'><button className='bg-white p-1  dark:bg-black rounded' type='submit'>Submit</button></div>
+                       </form>
+                   </div>
+                </div>}
+              </div>
+                   <div className='h-4'></div>
+                
             </div>
+
 
           </div>
         </div>

@@ -10,9 +10,10 @@ const userDetails = localStorage.getItem('user')
 import { useLogin } from '../../hooks/login/useLogin'
 import { useHome } from '../../hooks/home/useHome'
 
+
+
 const Navbar = () => {
-
-
+ const [search,setSearch] = useState("")
   const {handleLogin,handleSignup,logincross,signupcropss} = useNav()
   const {tooglethem,mode} = useHome()
   const {user,sum} = useSelector((state)=>state.user) 
@@ -22,6 +23,14 @@ const Navbar = () => {
     dispatch(getUser(JSON?.parse(userDetails)))
     
   }, [])
+
+  function handleSearch (e) {
+      e.preventDefault()
+      console.log(search)
+  
+
+  }
+
   
 
   return (
@@ -30,15 +39,17 @@ const Navbar = () => {
       <ul className='flex flex-wrap justify-between items-center'>
          <NavLink className='xl:text-3xl ml-[10px] md:text-2xl'>AbhileshCart</NavLink>
           <NavLink to={"/"} className='xl:text-xl hover:text-gray-400 ml-[6px]' >Home</NavLink>
-          <NavLink className='xl:text-xl hover:text-gray-400 ml-[6px]'>Tracker</NavLink>
+          <NavLink to={'/tracker'} className='xl:text-xl hover:text-gray-400 ml-[6px]'>Tracker</NavLink>
           <NavLink to={"/contact"} className='xl:text-xl hover:text-gray-400 ml-[6px]'>ContactUs</NavLink>
           <NavLink className='xl:text-xl hover:text-gray-400 ml-[6px]'>Dropdown <i className="ri-arrow-drop-down-line"></i></NavLink>
-          <input type='text' className='p-1 rounded  md:ml-[40px] md:w-[150px]  xl:ml-[60px] xl:w-[300px] dark:bg-slate-600 ' />
-          {/* <div><i className="ri-search-line bg-white p-2"></i></div> */}
-          <NavLink className='xl:text-xl hover:text-gray-400 ml-[10px]'>Search</NavLink>
 
+          <form  onSubmit={handleSearch}>
+          <input type='text' className='p-1 rounded  md:ml-[40px] md:w-[150px]  xl:ml-[60px] xl:w-[300px] dark:bg-slate-600 ' onChange={(e)=>setSearch(e.target.value)} required />
+         
+          {search.length>0 ? <NavLink to={`/search/${search}`} className='xl:text-xl hover:text-gray-400 ml-[10px]'><button type='submit'>Search</button></NavLink>:<button type='submit' className='xl:text-xl hover:text-gray-400 ml-[10px]'>Search</button>}
+          </form>
         {user ?
-         <div className='xl:text-xl ml-2 flex'><div>{user.name.charAt(0).toUpperCase() + user.name.slice(1)}</div><div><li className='text-xl hover:text-gray-400 ml-[10px] cursor-pointer' onClick={handleLogout}>Logout</li></div></div>:
+         <div className='xl:text-xl ml-2 flex'><div>{user.name.charAt(0).toUpperCase() + user.name.slice(1)}</div><div><li className='text-xl hover:text-gray-400 ml-[10px] cursor-pointer' onClick={handleLogout}  >Logout</li></div></div>:
 
         <div className='flex'><div><li className="xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer" onClick={handleLogin} >Login</li></div><div><li className='xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer' onClick={handleSignup}>Signup</li></div></div>}
 

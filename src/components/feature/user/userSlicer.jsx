@@ -51,11 +51,9 @@ export const userSlice = createSlice({
     },
     getSum : (state,action) =>{
       state.sum = action.payload
-
     },
     getTotalSum : (state,action) =>{
       state.totalSum = action.payload
-
     },
     getCartData : (state,action)=>{
       state.cart = action.payload

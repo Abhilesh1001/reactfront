@@ -9,6 +9,9 @@ import Footer from './components/footer/Footer'
 import QuickView from './components/quickview/QuickView'
 import Cart from './components/addcart/Cart'
 import Contact from './components/contact/Contact'
+import Search from './components/search/Search'
+import Tracker from './components/tracker/Tracker'
+
 
 function App() {
 
@@ -21,6 +24,8 @@ function App() {
           <Route exact path='/QuivkView/:id' element={<QuickView />} />
           <Route exact path='/Cart' element={<Cart />} />
           <Route exact path='/contact' element={<Contact />} />
+          <Route exact path='/search/:search' element={<Search />} />
+          <Route exact path='/tracker' element={<Tracker />} />
         </Routes>
         <Footer />
       </BrowserRouter>
