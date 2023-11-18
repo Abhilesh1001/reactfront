@@ -33,12 +33,12 @@ const Tracker = () => {
                                             <td className='pr-4 mt-2'>{item?.email}</td>
 
                                             <td ><button className={`p-2 mt-2 mb-2 mr-2 rounded ${handleId === item?.order_id && hanhlecheck!=="null"?"bg-green-100":"bg-white"}
-                                              dark:${handleId === item?.order_id && hanhlecheck!=="null"?"bg-sky-800":"bg-black"} `} onClick={() => handleSubmit(item?.order_id)}>Check Order Status</button></td>
+                                              ${handleId === item?.order_id && hanhlecheck!=="null"?"dark:bg-sky-800": "dark:bg-black"} `} onClick={() => handleSubmit(item?.order_id)}>Check Order Status</button></td>
 
-                                            <td ><button className={` p-2 mt-2 mb-2 mr-2 rounded ${adressId === item?.order_id && adress!=="null"?"bg-green-100":"bg-white"}  dark:${adressId === item?.order_id && adress!=="null"?"bg-sky-800":"bg-black"}`} onClick={() => handleCheckOrder(item?.order_id)}>Check Address</button></td>
+                                            <td ><button className={` p-2 mt-2 mb-2 mr-2 rounded ${adressId === item?.order_id && adress!=="null"?"bg-green-100":"bg-white"}  ${adressId === item?.order_id && adress!=="null"?"dark:bg-sky-800":"dark:bg-black"}`} onClick={() => handleCheckOrder(item?.order_id)}>Check Address</button></td>
 
 
-                                            <td ><button className={` p-2 mt-2 mb-2 mr-2 rounded ${productDetailId === item?.order_id && product!=="null"?"bg-green-100":"bg-white"} dark:bg-black`} onClick={() => handleProductDetails(item?.order_id)}>Product Details</button></td>
+                                            <td ><button className={` p-2 mt-2 mb-2 mr-2 rounded ${productDetailId === item?.order_id && product!=="null"?"bg-green-100":"bg-white"}  ${productDetailId === item?.order_id && product!=="null"?"dark:bg-sky-800":"dark:bg-black"}`} onClick={() => handleProductDetails(item?.order_id)}>Product Details</button></td>
                                         </tr>
                                     })
                                 }
