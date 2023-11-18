@@ -6,8 +6,10 @@ import { useHomePro } from '../home/useHomePro'
 
 
 export const useTracker = () => {
-    const { baseurl, user } = useSelector((state) => state.user)
-    const [tracker, setTracker] = useState([])
+    const { baseurl } = useSelector((state) => state.user)
+    const userData = localStorage.getItem("user")
+    const user = JSON.parse(userData)
+     const [tracker, setTracker] = useState([])
     const [cartData, setCartData] = useState([])
     const [orderDetail, setOrderDetails] = useState('')
     const [adress, setAdress] = useState("null")
@@ -20,13 +22,13 @@ export const useTracker = () => {
     const [handleId,setHandleId] = useState('')
     const [adressId,setAdressId] = useState('')
     const [productDetailId,setProductDetailId] = useState('')
-    console.log(adress)
+
     useEffect(() => {
         orderDetails()
     }, [user])
 
 
-    const orderDetails = async () => {
+const orderDetails = async () => {
         let token = localStorage.getItem('token')
         const emailData = {
             email: user?.email

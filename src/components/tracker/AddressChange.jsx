@@ -5,7 +5,6 @@ import {initialState,reducer} from '../reducer/changeadressreducer'
 const AddressChange = ({adressData}) => {
     const [data,dispatch] = useReducer(reducer,initialState)
    const {handleChageAdress,inputfiled } = useAdressChange(adressData,dispatch)
-   console.log(data)
     return (
         <>
             <div className='w-full '>
