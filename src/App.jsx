@@ -1,5 +1,4 @@
 import './App.css'
-import { useHome } from './hooks/home/useHome'
 import Navbar from './components/navbar/Navbar'
 import {
   BrowserRouter, Route, Routes
