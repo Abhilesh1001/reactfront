@@ -37,7 +37,7 @@ const Navbar = () => {
     <div className="fixed bg-slate-200 top-[20px] p-2 rounded dark:bg-gray-800 w-auto ml-10 z-10">
       <div className='w-[92vw] mr-[2px] flex items-center justify-center'>
       <ul className='flex flex-wrap justify-between items-center'>
-         <Link className='xl:text-3xl ml-[10px] md:text-2xl'>AbhileshCart</Link>
+         <Link to={"/"} className='xl:text-3xl ml-[10px] md:text-2xl'>AbhileshCart</Link>
           <Link to={"/"} className='xl:text-xl hover:text-gray-400 ml-[6px]' >Home</Link>
           <Link to={'/tracker'} className='xl:text-xl hover:text-gray-400 ml-[6px]'>Tracker</Link>
           <Link to={"/contact"} className='xl:text-xl hover:text-gray-400 ml-[6px]'>ContactUs</Link>
