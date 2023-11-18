@@ -25,7 +25,7 @@ export const useTracker = () => {
 
     useEffect(() => {
         orderDetails()
-    }, [user])
+    }, [])
 
 
 const orderDetails = async () => {
