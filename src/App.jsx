@@ -1,7 +1,9 @@
 import './App.css'
 import Navbar from './components/navbar/Navbar'
 import {
-  BrowserRouter, Route, Routes
+  HashRouter, // Import HashRouter instead of BrowserRouter
+  Route,
+  Routes
 } from 'react-router-dom'
 import Home from './components/home/Home'
 import Footer from './components/footer/Footer'
@@ -11,12 +13,10 @@ import Contact from './components/contact/Contact'
 import Search from './components/search/Search'
 import Tracker from './components/tracker/Tracker'
 
-
 function App() {
-
   return (
-    <div className='flex-col bg-gray-100   dark:bg-black dark:text-white h-min-[400px] h-auto fontfam'>
-      <BrowserRouter >
+    <div className='flex-col bg-gray-100 dark:bg-black dark:text-white h-min-[400px] h-auto fontfam'>
+      <HashRouter> {/* Use HashRouter instead of BrowserRouter */}
         <Navbar />
         <Routes>
           <Route exact path='/' element={<Home />} />
@@ -27,8 +27,8 @@ function App() {
           <Route exact path='/tracker' element={<Tracker />} />
         </Routes>
         <Footer />
-      </BrowserRouter>
-        </div>
+      </HashRouter>
+    </div>
   )
 }
 
