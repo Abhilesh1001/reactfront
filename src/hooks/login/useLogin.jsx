@@ -16,16 +16,6 @@ export const useLogin = (data, dispatch) => {
     e.preventDefault()
     setLoading(true)
     localStorage.removeItem('token')
-    setTimeout(() => {
-      localStorage.clear()
-      localStorage.clear()
-      disptch(getSum(0))
-      disptch(getUser(null))
-      disptch(getTotalSum(0))
-      disptch(getEmptyData({}))
-      alert('Your session has expired please login again')
-    }, 1200000);
-
     try {
       setLoading(true)
       const res = await axios.post(`${baseurl}cus/authlogin/`, data)

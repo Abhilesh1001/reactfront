@@ -28,7 +28,7 @@ const QuickView = () => {
         <div className='homecom'>
             <div className='margin'>
               <div className='flex w-full flex-wrap h-auto  mt-6'>
-                <div className={`w-[400px] h-[450px] bg-slate-200 m-4  ${isFixed ? `relative top-[316px]` : 'fixed'} flex flex-col rounded`}>
+                <div className={`w-[400px] h-[450px] bg-slate-200 m-4 dark:bg-gray-800 ${isFixed ? `relative top-[316px]` : 'fixed'} flex flex-col rounded`}>
                   <div className='w-full flex items-center justify-center'>
                   <img src={`${baseurl}${data?.image}`} className='w-[300px] h-[300px] rounded-xl my-4'  alt="" />
                   </div>
