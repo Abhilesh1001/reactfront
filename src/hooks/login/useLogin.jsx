@@ -1,17 +1,22 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUser, getLoginCross, getSum, getCartData, getEmptyData, getTotalSum } from '../../components/feature/user/userSlicer'
+import { getUser, getLoginCross, getSum, getCartData, getEmptyData, getTotalSum,getToken } from '../../components/feature/user/userSlicer'
 import { useNavigate } from 'react-router-dom'
 
 //user login 
 export const useLogin = (data, dispatch) => {
+  // let [authToken,setUserAuthToken] = useState(()=>localStorage.getItem('realToken') ? JSON.parse(localStorage.getItem('realToken')) : null)
+  const {token:authToken} = useSelector((state)=>state.user)
+
+
   const { baseurl, user, cart } = useSelector((state) => state.user)
   const [logindata, setLoginData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [errordata, setError] = useState('')
   const navigate = useNavigate()
   const disptch = useDispatch()
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -21,13 +26,18 @@ export const useLogin = (data, dispatch) => {
       const res = await axios.post(`${baseurl}cus/authlogin/`, data)
       // console.log(res.data.token.access)
       // console.log(res.data.msg)
+      localStorage.setItem('realToken',JSON.stringify(res.data.token))
       localStorage.setItem('token', res.data.token.access)
+
+      // setUserAuthToken(res.data.token)
       setLoginData(res.data.msg)
       setError(null)
+      disptch(getToken(res.data.token))
       setLoading(false)
       dispatch({ type: 'EMAIL', value: "" })
       dispatch({ type: 'PASSWORD', value: "" })
       disptch(getLoginCross(false))
+
     } catch (error) {
       setLoginData(null)
       setError("Email Id or Password Wrong")
@@ -83,6 +93,56 @@ export const useLogin = (data, dispatch) => {
     }
   }
 
+  // updata Token 
+
+
+
+useEffect(( ) =>{
+  let time = 1000 * 60 * 4
+
+  let interval = setInterval(()=>{
+      if(authToken !== null){
+          updataToken()
+      }
+  },time)
+  return ()=>clearInterval(interval)
+},[authToken])
+
+const updataToken  = async () =>{
+  // console.log('updata token called')
+  // console.log(authToken.refresh)
+ 
+  // console.log(data2)
+  
+  let response = await fetch(`${baseurl}cus/api/token/refresh/`,{
+      method : 'POST',
+      headers : {
+          'Content-Type':'application/json'
+      },
+      body : JSON.stringify({'refresh':authToken?.refresh})
+     })
+  
+    //  console.log()
+     let data = await response.json()
+    //  console.log(data)
+   let newData = {
+      refresh :authToken?.refresh,
+      access  : data.access
+   } 
+   if(response.status===200){
+      //  setUserAuthToken(newData)
+      disptch(getToken(newData))
+       localStorage.setItem('realToken',JSON.stringify(newData))
+       localStorage.setItem('token',data.access)
+   }else{
+    handleLogout()
+   }
+
+   
+  // console.log('data',JSON.parse({'refresh':authToken}))
+}
+
+
 
 
 
@@ -125,6 +185,8 @@ export const useLogin = (data, dispatch) => {
     disptch(getUser(null))
     disptch(getTotalSum(0))
     disptch(getEmptyData({}))
+    disptch(getToken(null))
+    // setUserAuthToken(null)
 
   }
 

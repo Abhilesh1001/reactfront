@@ -10,7 +10,8 @@ export const userSlice = createSlice({
     signupcropss : null,
     cart : localStorage.getItem('cart') === null ? {} : JSON.parse(localStorage.getItem('cart')) ,
     totalSum: localStorage.getItem('totalSum') === null? 0:localStorage.getItem('totalSum'),
-    sum: localStorage.getItem('sum') === null? 0:localStorage.getItem('sum')
+    sum: localStorage.getItem('sum') === null? 0:localStorage.getItem('sum'),
+    token : localStorage.getItem('realToken') ? JSON.parse(localStorage.getItem('realToken')) : null
   },
   reducers: {
     getUser : (state,action)=>{
@@ -66,6 +67,10 @@ export const userSlice = createSlice({
     getEmptyData : (state,action) =>{
       state.cart = action.payload
     },
+
+    getToken : (state,action) =>{
+      state.token = action.payload
+    }
     
 
 
@@ -73,6 +78,6 @@ export const userSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { getUser,getLoginCross,getSignupCross,getCart,getRemove,getSum,getCartData,getEmptyData,getTotalSum } = userSlice.actions
+export const { getUser,getLoginCross,getSignupCross,getCart,getRemove,getSum,getCartData,getEmptyData,getTotalSum,getToken } = userSlice.actions
 
 export default userSlice.reducer
