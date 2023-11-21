@@ -28,7 +28,7 @@ const QuickView = () => {
 
     return (
         <div className='homecom'>
-            <div className='margin'>
+            <div className='pt-[60px] md:pl-[40px] md:mr-[40px]'>
               <div className='flex w-full flex-wrap h-auto  mt-6'>
                 <div className={` setdiv bg-slate-200 m-4 dark:bg-gray-800 ${width>829 && (isFixed ? `relative top-[316px]` : 'fixed')} } flex flex-col rounded`}>
                   <div className='w-full flex items-center justify-center'>

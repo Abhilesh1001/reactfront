@@ -7,10 +7,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import HomeCarousel from './product/homeCarousel/HomeCarousel'
-import Image1 from  '../../assets/1.jpg'
 import Image2 from  '../../assets/2.jpg'
 import Image3 from  '../../assets/3.jpg'
 import AddCart from '../addcart/AddCart'
+import {Link} from 'react-router-dom'
 
 
 
@@ -69,7 +69,8 @@ const Home = () => {
                     return <div key={index} className='md:h-450px h-200px dark:bg-gray-800 bg-slate-200 rounded'> 
                     <div className='md:h-56 h-40 flex justify-center items-center rounded-t-xl'>
                       {/* <img src={`${ImageUrl}`} className='h-44 w-44 rounded' alt="" /> */}
-                      <img src={`${ImageUrl}`} className='md:h-44 md:w-44 h-32 w-32 rounded' alt="" />
+
+                      <Link to={`/QuivkView/${item?.product_id}`}><img src={`${ImageUrl}`} className='md:h-44 md:w-44 h-32 w-32 rounded' alt="" /></Link>
                     </div>
                     <div className='ml-2 mt-4 flex-col items-center justify-center cartbelow'>
                     <div>Product Name : <b>{item?.product_name}</b></div>
@@ -78,7 +79,7 @@ const Home = () => {
                     </div>
                     <div className='flex justify-between ml-2 mr-2 mb-4'> 
                     <div className=''><AddCart  id={item?.product_id} name={item?.product_name} price={item?.price}  /></div>
-                    <a className='bg bg-slate-50 p-2 rounded cursor-pointer dark:bg-black displaymention'> Quick View</a>
+                    <Link to={`/QuivkView/${item?.product_id}`}><button className='bg bg-slate-50 p-2 rounded cursor-pointer dark:bg-black displaymention'> Quick View</button></Link>
                     </div>
                     </div>
                 })}

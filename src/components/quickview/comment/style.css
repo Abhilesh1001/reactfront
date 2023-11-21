@@ -12,6 +12,33 @@
 @media only screen and (max-width:948px) {
     .widthset {
         width: 350px;
+    } 
+}
+@media only screen and (max-width:444px) {
+    .widthset {
+        width: 310px;
+    }
+    
+}
+@media only screen and (max-width:370px) {
+    .widthset {
+        width: 280px;
+    }
+    
+}
+
+
+.margin1{
+    width: 800px;
+    padding: 80px 40px 0px 40px;
+}
+
+
+
+
+@media only screen and (max-width:440px) {
+    .margin1{
+        padding: 80px 20px 0px 10px;
     }
     
 }
