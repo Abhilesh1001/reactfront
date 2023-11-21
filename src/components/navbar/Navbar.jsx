@@ -40,12 +40,12 @@ const Navbar = () => {
   }
 
   return (
-    <div className="fixed bg-slate-200 top-[20px] p-2 rounded dark:bg-gray-800 w-auto ml-10 z-10">
-      <div className='xl:w-[92vw] mr-[2px] flex items-center md:w-[90vw] w-[85vw]'>
+    <div className="fixed bg-slate-200 top-[20px] p-2 rounded dark:bg-gray-800 w-auto md:ml-10 ml-4 z-10">
+      <div className='xl:w-[92vw] md:mr-2 flex items-center md:w-[90vw] w-[90vw]'>
 
         <ul className='lg:flex lg:flex-wrap lg:justify-between lg:items-center'>
           <Link to={"/"} className='xl:text-3xl ml-[10px] md:text-2xl'>AbhileshCart</Link>
-          <div className='lg:hidden w-5 h-5 absolute right-12 top-[12px]' onClick={handlemobileView}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path></svg></div>
+          <div className='lg:hidden w-5 h-5 absolute right-12 top-[12px] dark:bg-gray-400' onClick={handlemobileView}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path></svg></div>
 
           {/* for desktop view  */}
           <div className='lg:flex hidden'>
