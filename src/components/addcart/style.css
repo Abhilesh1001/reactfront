@@ -6,3 +6,106 @@
 .margin{
     padding: 80px 40px 0px 40px;
 }
+
+@media only screen and (max-width:821px) {
+    .displaymention {
+        display: none;
+        
+    }
+    
+}
+.widthitemcart{
+    width: 700px;
+
+}
+.bgadj{
+    width: 600px;
+
+}
+.widthchech{
+    width: 575px;
+
+}
+
+
+@media only screen and (max-width:1398px) {
+    .widthitemcart{
+        width: 500px;
+    }
+       
+}
+@media only screen and (max-width:1200px) {
+    .bgadj{
+        width: 400px;
+    }
+    .widthchech{
+        width: 380px;
+    }
+       
+}
+
+@media only screen and (max-width:996px) {
+    .widthitemcart{
+        width: 800px;
+    }
+    .bgadj{
+        width: 600px;
+    }
+    .widthchech{
+        width: 580px;
+    }
+     
+       
+}
+
+
+@media only screen and (max-width:708px) {
+    .widthitemcart{
+        width: 600px;
+    }
+    .bgadj{
+        width: 400px;
+    }
+    .widthchech{
+        width: 380px;
+    }
+     
+       
+}
+
+@media only screen and (max-width:708px) {
+    .widthitemcart{
+        width: 400px;
+    }
+    .bgadj{
+        width: 300px;
+    }
+    .widthchech{
+        width: 280px;
+    }
+     
+       
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

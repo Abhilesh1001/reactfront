@@ -1,0 +1,17 @@
+.widthset{
+    width: 700px;
+}
+
+
+@media only screen and (max-width:1247px) {
+    .widthset {
+        width: 400px;
+    }
+    
+}
+@media only screen and (max-width:948px) {
+    .widthset {
+        width: 350px;
+    }
+    
+}

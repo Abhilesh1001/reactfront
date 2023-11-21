@@ -1,0 +1,59 @@
+.widthadjust{
+    width: 50%;
+
+}
+
+@media only screen and (max-width:1397px) {
+    .widthadjust{
+        width: 40%;
+    }
+    
+}
+
+/* 1311 last*/
+
+
+
+@media only screen and (max-width:1218px) { 
+    .widthadjust{
+        width: 50%;
+    }
+    
+}
+@media only screen and (max-width:1097px) { 
+    .widthadjust{
+        width: 45%;
+    }
+    
+}
+@media only screen and (max-width:1005px) { 
+    .widthadjust{
+        width: 40%;
+    }
+    
+}
+
+@media only screen and (max-width:930px) { 
+    .widthadjust{
+        width: 40%;
+    }
+    
+}
+
+@media only screen and (max-width:946px) { 
+    .anotheradjust{
+        width: 370px;
+    }
+    .widthadjust{
+        width: 50%;
+    }
+}
+@media only screen and (max-width:838px) { 
+   
+    .widthadjust{
+        width: 100%;
+    }
+
+
+}
+

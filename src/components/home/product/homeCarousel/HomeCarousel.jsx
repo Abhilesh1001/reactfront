@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import { useSelector } from 'react-redux';
 import {NavLink} from  'react-router-dom'
 import AddCart from '../../../addcart/AddCart';
+import './style.css'
 
 
 const HomeCarousel = () => {
@@ -17,8 +18,34 @@ const HomeCarousel = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 1
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          initialSlide: 3 
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      },
+      
+    ]
   };
 
   return (
@@ -32,11 +59,11 @@ const HomeCarousel = () => {
                     {data[cat]?.map((item,indexs)=>{
                         // console.log(item)
                         const ImageUrl  = `${baseurl}${item?.image}` 
-                        return <div key={indexs} className='h-450px  dark:bg-gray-800 bg-slate-200 rounded'>
-                           <div className='h-56 flex justify-center items-center rounded-t-xl'>
-                      <img src={`${ImageUrl}`} className='h-44 w-44 rounded' alt="" />
+                        return <div key={indexs} className='md:h-450px h-200px  dark:bg-gray-800 bg-slate-200 rounded'>
+                           <div className='md:h-56 h-40 flex justify-center items-center rounded-t-xl'>
+                      <img src={`${ImageUrl}`} className='md:h-44 md:w-44 h-32 w-32 rounded' alt="" />
                     </div>
-                    <div className='ml-2 mt-4 flex-col items-center justify-center'>
+                    <div className='ml-2 mt-4 flex-col items-center justify-center cartbelow'>
                     <div>Product Name : <b>{item?.product_name}</b></div>
                     <div >MRP Rs :<b>{item?.price}</b> </div>
                     <div className='mb-4'>{item?.desc}</div>
@@ -50,7 +77,7 @@ const HomeCarousel = () => {
                       </div>
 
 
-                    <NavLink to={`/QuivkView/${item?.product_id}`}><button className='bg bg-slate-50 p-2 rounded cursor-pointer dark:bg-black'>Quick View</button></NavLink>
+                    <NavLink to={`/QuivkView/${item?.product_id}`}><button className='bg bg-slate-50 p-2 rounded cursor-pointer dark:bg-black displaymention'>Quick View</button></NavLink>
                     </div>
 
                         </div>

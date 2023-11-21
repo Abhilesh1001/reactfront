@@ -2,21 +2,25 @@ import React from 'react'
 import { useTracker } from '../../hooks/tracer/useTracker'
 import {useSelector,useDispatch} from 'react-redux'
 import AddressChange from './AddressChange'
+import './style.css'
+import useWindowWidth from '../../hooks/useWindowWidth'
+
 
 const Tracker = () => {
+    const {width} = useWindowWidth()
     const { orderDetail, handleCheckOrder, handleSubmit, cartData, tracker, hanhlecheck, adress, handleProductDetails, adressData,product,productData,handleId,adressId,productDetailId } = useTracker()
     const {baseurl} = useSelector((state)=>state.user)    
     return (
         <div className='homecom' >
             <div className='margin'>
                 <div className='flex flex-wrap'>
-                    <div className='w-[50%]'>
+                    <div className={`${width>1218 ?'w-[650px]':'w-[500px]' } anotheradjust mr-2`}>
                         <div className='text-xl'>Order Details</div>
                         <table className='rounded'>
                             <thead>
                                 <tr className='bg-slate-400 rounded  dark:bg-gray-800'>
                                     <th>Order Id</th>
-                                    <th>Email</th>
+                                    {width>1218 && <th>Email</th>}
                                     <th>Order Details</th>
                                     <th>Adress</th>
                                     <th>Product Details</th>
@@ -27,21 +31,22 @@ const Tracker = () => {
                                     orderDetail.length > 0 && orderDetail.map((item, index) => {
                                         return <tr key={index} className='bg-slate-200   dark:bg-gray-600'>
                                             <td className='p-1 mt-2 flex items-center justify-center'>{item?.order_id}</td>
-                                            <td className='pr-4 mt-2'>{item?.email}</td>
+
+                                            {width>1218 && <td className='pr-4 mt-2'>{item?.email}</td>}
 
                                             <td ><button className={`p-2 mt-2 mb-2 mr-2 rounded ${handleId === item?.order_id && hanhlecheck!=="null"?"bg-green-100":"bg-white"}
-                                              ${handleId === item?.order_id && hanhlecheck!=="null"?"dark:bg-sky-800": "dark:bg-black"} `} onClick={() => handleSubmit(item?.order_id)}>Check Order Status</button></td>
+                                              ${handleId === item?.order_id && hanhlecheck!=="null"?"dark:bg-sky-800": "dark:bg-black"} `} onClick={() => handleSubmit(item?.order_id)}>{width>946 ? <div>Check Order Status</div>:<div>Check</div>}</button></td>
 
-                                            <td ><button className={` p-2 mt-2 mb-2 mr-2 rounded ${adressId === item?.order_id && adress!=="null"?"bg-green-100":"bg-white"}  ${adressId === item?.order_id && adress!=="null"?"dark:bg-sky-800":"dark:bg-black"}`} onClick={() => handleCheckOrder(item?.order_id)}>Check Address</button></td>
+                                            <td ><button className={` p-2 mt-2 mb-2 mr-2 rounded ${adressId === item?.order_id && adress!=="null"?"bg-green-100":"bg-white"}  ${adressId === item?.order_id && adress!=="null"?"dark:bg-sky-800":"dark:bg-black"}`} onClick={() => handleCheckOrder(item?.order_id)}>{width>946 ? <div>Check Address</div>:<div>Check</div>}  </button></td>
 
-                                            <td ><button className={` p-2 mt-2 mb-2 mr-2 rounded ${productDetailId === item?.order_id && product!=="null"?"bg-green-100":"bg-white"}  ${productDetailId === item?.order_id && product!=="null"?"dark:bg-sky-800":"dark:bg-black"}`} onClick={() => handleProductDetails(item?.order_id)}>Product Details</button></td>
+                                            <td ><button className={` p-2 mt-2 mb-2 mr-2 rounded ${productDetailId === item?.order_id && product!=="null"?"bg-green-100":"bg-white"}  ${productDetailId === item?.order_id && product!=="null"?"dark:bg-sky-800":"dark:bg-black"}`} onClick={() => handleProductDetails(item?.order_id)}>{width>946 ? <div>Product Details</div>:<div>Check</div>}  </button></td>
                                         </tr>
                                     })
                                 }
                             </tbody>
                         </table>
                     </div>
-                    <div className='w-[50%]'>
+                    <div className='widthadjust'>
                         {hanhlecheck !== "null" && <div className='w-full'>
                             <div className='text-xl'>Your Order Satus</div>
                             {

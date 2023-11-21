@@ -4,7 +4,7 @@ import './footer.css'
 const Footer = () => {
   return (
     <div className='homecom1' >
-        <div className='h-[300px] mt-0 w-full dark:bg-gray-800 bg-slate-200'>
+        <div className='h-auto mt-0 w-full dark:bg-gray-800 bg-slate-200 pb-10'>
 
          <div className='margin flex flex-wrap ml-10 mr-10'>
               <div className='mr-10 text-xl'>

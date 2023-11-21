@@ -1,0 +1,15 @@
+.cartbelow{
+    margin-left: 10px;
+    margin-top:4px;
+    /* align-items: center; */
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+@media only screen and (max-width:821px) {
+    .cartbelow {
+        display: none;
+    }
+    
+}

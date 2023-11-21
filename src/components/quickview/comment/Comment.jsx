@@ -2,6 +2,7 @@ import React, { useReducer, useState } from 'react'
 import { useComment } from '../../../hooks/comment/useComment'
 import { reducer, initialState } from '../../reducer/commentreducer'
 import {reducerReply,initialStatereplly} from '../../reducer/replyreducer'
+import './style.css'
 
 const Comment = (ProductID) => {
     const [display,setDisplay] = useState("hidden")
@@ -10,11 +11,11 @@ const Comment = (ProductID) => {
     const [dataReply,dispatchReply] = useReducer(reducerReply,initialStatereplly)
     const { handleCommentSubmit, commentData, replyCommentData,handleReplySubmit } = useComment(ProductID, datacomment, dispatchComment,dataReply,dispatchReply)
     function handleClick (e) {
-        console.log('ok')
+        // console.log('ok')
         console.log('data',e.target.id)
         setReplyId(e.target.id)
         setDisplay(`${display==="hidden"?"block":"hidden"}`)
-        console.log(display)
+        // console.log(display)
     }
 
     return (
@@ -23,7 +24,7 @@ const Comment = (ProductID) => {
                 <div className=''>
                     <div className='text-3xl mt-4'>Comment</div>
                     <form onSubmit={handleCommentSubmit} >
-                        <input type="text" className='w-[80%] mr-4 text-2xl my-2 rounded' value={datacomment.comment} onChange={(e) => dispatchComment({ type: "COMMENT", value: e.target.value })} />
+                        <input type="text" className='widthset mr-4 text-2xl my-2 rounded' value={datacomment.comment} onChange={(e) => dispatchComment({ type: "COMMENT", value: e.target.value })} />
                         <div><button type='submit' className=' bg-slate-300  dark:bg-gray-800 p-2 rounded'>Submit</button></div>
                     </form>
 
@@ -32,7 +33,7 @@ const Comment = (ProductID) => {
                     <div className='relative '>
                         {
                             Object.keys(commentData)?.map((item, index) => {
-                                console.log(commentData[item].sno,item)
+                                // console.log(commentData[item].sno,item)
                                 return <div key={index}>
                                     <div>
                                         <div className=' flex'>
