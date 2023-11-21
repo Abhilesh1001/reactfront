@@ -59,12 +59,13 @@ const HomeCarousel = () => {
                     {data[cat]?.map((item,indexs)=>{
                         // console.log(item)
                         const ImageUrl  = `${baseurl}${item?.image}` 
-                        return <div key={indexs} className='md:h-450px h-200px  dark:bg-gray-800 bg-slate-200 rounded'>
+                        return <div key={indexs} className='md:h-450px h-200px  dark:bg-gray-800 bg-slate-200 rounded '>
                            <div className='md:h-56 h-40 flex justify-center items-center rounded-t-xl'>
 
                       <Link to={`/QuivkView/${item?.product_id}`}><img src={`${ImageUrl}`} className='md:h-44 md:w-44 h-32 w-32 rounded' alt="" /></Link>
                     </div>
-                    <div className='ml-2 mt-4 flex-col items-center justify-center cartbelow'>
+                      <div className='pricedis ml-2' >Rs :<b>{item?.price}</b> </div>
+                    <div className='ml-2 mt-4 flex-col  cartbelow'>
                     <div>Product Name : <b>{item?.product_name}</b></div>
                     <div >MRP Rs :<b>{item?.price}</b> </div>
                     <div className='mb-4'>{item?.desc}</div>

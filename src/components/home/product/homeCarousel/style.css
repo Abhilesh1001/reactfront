@@ -7,9 +7,18 @@
     flex-direction: column;
 }
 
+.pricedis{
+   display: none;
+}
+
 @media only screen and (max-width:821px) {
     .cartbelow {
         display: none;
     }
+    .pricedis{
+        display: flex;
+        
+    }
+
     
 }

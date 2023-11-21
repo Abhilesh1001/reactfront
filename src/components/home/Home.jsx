@@ -72,7 +72,8 @@ const Home = () => {
 
                       <Link to={`/QuivkView/${item?.product_id}`}><img src={`${ImageUrl}`} className='md:h-44 md:w-44 h-32 w-32 rounded' alt="" /></Link>
                     </div>
-                    <div className='ml-2 mt-4 flex-col items-center justify-center cartbelow'>
+                    <div className='pricedis ml-2' >Rs :<b>{item?.price}</b> </div>
+                    <div className='ml-2 mt-4 flex-col cartbelow'>
                     <div>Product Name : <b>{item?.product_name}</b></div>
                     <div >MRP Rs :<b>{item?.price}</b> </div>
                     <div className='mb-4'>{item?.desc}</div>

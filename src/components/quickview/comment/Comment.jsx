@@ -20,7 +20,7 @@ const Comment = (ProductID) => {
     return (
         <div className='relative'>
             <div> 
-                <div className='margin1 xl:w-[700px] lg:w-[400px] md:w-[380px] w-[340px] '>
+                <div className=' xl:w-[700px] lg:w-[400px] md:w-[380px] w-[340px] '>
                     <div className='text-3xl mt-4'>Comment</div>
                     <form onSubmit={handleCommentSubmit} >
                         <input type="text" className=' mr-4 text-2xl my-2 rounded xl:w-[80%] lg:w-[80%] md:w-[85%]' value={datacomment.comment} onChange={(e) => dispatchComment({ type: "COMMENT", value: e.target.value })} />

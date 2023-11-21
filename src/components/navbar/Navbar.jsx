@@ -70,26 +70,26 @@ const Navbar = () => {
 
 
           {/* for Mobile view  */}
-          <div className={`lg:hidden ${hiddenmobile}`}>
+          <div className={`lg:hidden ${hiddenmobile}`} >
             <div className='flex flex-col'>
-              <Link to={"/"} className='xl:text-xl hover:text-gray-400 ml-[6px]' >Home</Link>
-              <Link to={'/tracker'} className='xl:text-xl hover:text-gray-400 ml-[6px]'>Tracker</Link>
-              <Link to={"/contact"} className='xl:text-xl hover:text-gray-400 ml-[6px]'>ContactUs</Link>
+              <Link to={"/"} className='xl:text-xl hover:text-gray-400 ml-[6px]' onClick={handlemobileView}  >Home</Link>
+              <Link to={'/tracker'} className='xl:text-xl hover:text-gray-400 ml-[6px]' onClick={handlemobileView}>Tracker</Link>
+              <Link to={"/contact"} className='xl:text-xl hover:text-gray-400 ml-[6px]'  onClick={handlemobileView}>ContactUs</Link>
               <Link className='xl:text-xl hover:text-gray-400 ml-[6px]'>Dropdown <i className="ri-arrow-drop-down-line"></i></Link>
             </div>
 
-            <form onSubmit={handleSearch}>
+            <form onSubmit={handleSearch} >
               <div className='flex flex-col'>
                 <input type='text' className='p-1 rounded  md:ml-[40px] md:w-[150px]  xl:ml-[60px] xl:w-[300px] dark:bg-slate-600 ' onChange={(e) => setSearch(e.target.value)} required />
 
-                {search.length > 0 ? <Link to={`/search/${search}`} className='xl:text-xl hover:text-gray-400 ml-[10px] '><button type='submit'>Search</button></Link> : <button type='submit' className='xl:text-xl hover:text-gray-400 ml-[10px] flex items-center'>Search</button>}
+                {search.length > 0 ? <Link to={`/search/${search}`} className='xl:text-xl hover:text-gray-400 ml-[10px] '><button type='submit'  onClick={handlemobileView}>Search</button></Link> : <button type='submit' className='xl:text-xl hover:text-gray-400 ml-[10px] flex items-center'  onClick={handlemobileView}>Search</button>}
 
                 {user ?
                   <div className='xl:text-xl ml-2 flex flex-col'><div>{user.name.charAt(0).toUpperCase() + user.name.slice(1)}</div><div><li className='text-xl hover:text-gray-400 ml-[10px] cursor-pointer' onClick={handleLogout}  >Logout</li></div></div> :
 
                   <div className='flex'><div><li className="xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer" onClick={handleLogin} >Login</li></div><div><li className='xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer' onClick={handleSignup}>Signup</li></div></div>}
 
-                <div><Link to={"/cart"} className='xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer'>Cart<span>({sum})</span></Link> </div>
+                <div><Link to={"/cart"} className='xl:text-xl hover:text-gray-400 ml-[10px] cursor-pointer' onClick={handlemobileView}>Cart<span>({sum})</span></Link> </div>
 
 
               </div>
