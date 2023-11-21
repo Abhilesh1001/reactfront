@@ -1,8 +1,9 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUser, getLoginCross, getSum, getCartData, getEmptyData, getTotalSum,getToken } from '../../components/feature/user/userSlicer'
+import { getUser, getLoginCross, getSum, getCartData, getEmptyData, getTotalSum,getToken,getMobileView } from '../../components/feature/user/userSlicer'
 import { useNavigate } from 'react-router-dom'
+
 
 //user login 
 export const useLogin = (data, dispatch) => {
@@ -10,7 +11,8 @@ export const useLogin = (data, dispatch) => {
   const {token:authToken} = useSelector((state)=>state.user)
 
 
-  const { baseurl, user, cart } = useSelector((state) => state.user)
+  const { baseurl, user, cart,hiddenmobileview } = useSelector((state) => state.user)
+  console.log('hiddenmobi',hiddenmobileview)
   const [logindata, setLoginData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [errordata, setError] = useState('')
@@ -21,6 +23,7 @@ export const useLogin = (data, dispatch) => {
     e.preventDefault()
     setLoading(true)
     localStorage.removeItem('token')
+    
     try {
       setLoading(true)
       const res = await axios.post(`${baseurl}cus/authlogin/`, data)
@@ -44,10 +47,10 @@ export const useLogin = (data, dispatch) => {
       setLoading(false)
       // console.log('error', error.message)
     }
-
+    
     Profile()
     // receiving data from cart as per user 
-
+      
     let token = localStorage.getItem('token')
     // console.log(data.email)
     try {
@@ -150,10 +153,12 @@ const updataToken  = async () =>{
 
   const handleLogout = async () => {
     let gettoken = localStorage.getItem('token')
+    disptch(getMobileView(hiddenmobileview))
     let data = {
       item_json: JSON.stringify(cart),
       user: parseInt(user.id)
     }
+    
     // console.log(data, gettoken)
     try {
       const response = await axios.post(`${baseurl}newshop/cartCreate/`, data, {
@@ -192,6 +197,7 @@ const updataToken  = async () =>{
 
   function handleLogin() {
     disptch(getLoginCross(false))
+    disptch(getMobileView(hiddenmobileview))
   }
 
   return { handleSubmit, logindata, errordata, loading, handleLogout, handleLogin }

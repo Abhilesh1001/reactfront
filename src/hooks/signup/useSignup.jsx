@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import {useSelector,useDispatch} from 'react-redux'
-import {getSignupCross} from '../../components/feature/user/userSlicer'
+import {getSignupCross,getMobileView} from '../../components/feature/user/userSlicer'
 
 
 //signup 
@@ -10,13 +10,14 @@ export const useSignup =(data,dispatch)=>{
     const [loading,setLoading] = useState(false)
     const [nonfielderror,setNonFieldError] = useState(null)
     const [error,setError] = useState(null)
-    const {baseurl} = useSelector((state)=>state.user)
+    const {baseurl,hiddenmobileview} = useSelector((state)=>state.user)
     const disp = useDispatch()
 
 
     const handleSubmit = async (e) => {
         setLoading(true)
         e.preventDefault()
+        disp(getMobileView(hiddenmobileview))
         try {
             const res = await axios.post(`${baseurl}cus/authreg/`,data)
             // console.log(res) 
