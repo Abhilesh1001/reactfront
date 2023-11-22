@@ -4,15 +4,17 @@ export const userSlice = createSlice({
   name: 'userslice',
   initialState: {
     user : null,
-    baseurl : 'https://abhileshkumar.pythonanywhere.com/', 
-    // baseurl : 'http://127.0.0.1:8000/',
+    // baseurl : 'https://abhileshkumar.pythonanywhere.com/', 
+    baseurl : 'http://127.0.0.1:8000/',
     logincross : null,
     signupcropss : null,
     cart : localStorage.getItem('cart') === null ? {} : JSON.parse(localStorage.getItem('cart')) ,
     totalSum: localStorage.getItem('totalSum') === null? 0:localStorage.getItem('totalSum'),
     sum: localStorage.getItem('sum') === null? 0:localStorage.getItem('sum'),
     token : localStorage.getItem('realToken') ? JSON.parse(localStorage.getItem('realToken')) : null,
-    hiddenmobileview: 'hidden'
+    hiddenmobileview: 'hidden',
+    handlereset : null,
+    handleResetEmail : null,
   },
   reducers: {
     getUser : (state,action)=>{
@@ -80,6 +82,12 @@ export const userSlice = createSlice({
       }else {
         state.hiddenmobileview = 'hidden'
       }
+    },
+    getHandleReset : (state,action) =>{
+      state.handlereset = action.payload
+    },
+    getHandleResetEmail : (state,action)=>{
+      state.handleResetEmail = action.payload
     }
     
 
@@ -88,6 +96,6 @@ export const userSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { getUser,getLoginCross,getSignupCross,getCart,getRemove,getSum,getCartData,getEmptyData,getTotalSum,getToken,getMobileView } = userSlice.actions
+export const { getUser,getLoginCross,getSignupCross,getCart,getRemove,getSum,getCartData,getEmptyData,getTotalSum,getToken,getMobileView,getHandleReset,getHandleResetEmail } = userSlice.actions
 
 export default userSlice.reducer

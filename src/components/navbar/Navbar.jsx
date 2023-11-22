@@ -5,23 +5,40 @@ import Login from '../feature/login/Login'
 import Signup from '../feature/signup/Signup'
 import { useNav } from '../../hooks/useNav'
 import { useSelector, useDispatch } from 'react-redux'
-import { getUser, getCart,getMobileView } from '../feature/user/userSlicer'
+import { getUser, getCart,getMobileView,getHandleReset } from '../feature/user/userSlicer'
 const userDetails = localStorage.getItem('user')
 import { useLogin } from '../../hooks/login/useLogin'
 import { useHome } from '../../hooks/home/useHome'
+import PasswordReset from '../forgetpassword/PasswordReset'
+import ResetForgetPassword from '../forgetpassword/ResetForgetPassword'
 
 const Navbar = () => {
   const [search, setSearch] = useState("")
   const { handleLogin, handleSignup, logincross, signupcropss } = useNav()
-  const {hiddenmobileview} = useSelector((state)=>state.user)
-  console.log(hiddenmobileview)
+  const {hiddenmobileview,handlereset,handleResetEmail} = useSelector((state)=>state.user)
   const { tooglethem, mode } = useHome()
   const { user, sum } = useSelector((state) => state.user)
   const dispatch = useDispatch()
   const { handleLogout } = useLogin()
+  const [drop,setDrop] = useState('drop')
+  
+
+  
+  const handleDrop = () =>{
+    setDrop(`${drop==='drop'?'null':'drop'}`)
+  }
+ 
+  const handleReset = () =>{
+    dispatch(getHandleReset(`${handlereset==='handlereset'?null:'handlereset'}`))
+  }
+
+
+
   useEffect(()=>{
        
   },[hiddenmobileview])
+
+  
 
   useEffect(() => {
     dispatch(getUser(JSON?.parse(userDetails)))
@@ -48,7 +65,13 @@ const Navbar = () => {
             <Link to={"/"} className='xl:text-xl hover:text-gray-400 ml-[6px]' >Home</Link>
             <Link to={'/tracker'} className='xl:text-xl hover:text-gray-400 ml-[6px]'>Tracker</Link>
             <Link to={"/contact"} className='xl:text-xl hover:text-gray-400 ml-[6px]'>ContactUs</Link>
-            <Link className='xl:text-xl hover:text-gray-400 ml-[6px]'>Dropdown <i className="ri-arrow-drop-down-line"></i></Link>
+          <div className='flex flex-col'>
+              <div className='relative'>
+              <Link className='xl:text-xl hover:text-gray-400 ml-[6px] ' onClick={handleDrop} >Dropdown <i className="ri-arrow-drop-down-line"></i></Link>
+              {drop !=='drop' && <Link className='absolute top-12 bg-slate-200 w-40 flex items-center justify-center p-2 dark:bg-slate-600' onClick={handleReset}>{user!==null ? <span>Reset Password</span> : <span>Login Require</span> }</Link>}
+              </div>
+              
+              </div>
             <form onSubmit={handleSearch}>
               <input type='text' className='p-1 rounded  md:ml-[40px] md:w-[150px]  xl:ml-[60px] xl:w-[300px] dark:bg-slate-600 ' onChange={(e) => setSearch(e.target.value)} required />
 
@@ -71,12 +94,16 @@ const Navbar = () => {
               <Link to={"/"} className='xl:text-xl hover:text-gray-400 ml-[6px]' onClick={()=>dispatch(getMobileView(hiddenmobileview))}  >Home</Link>
               <Link to={'/tracker'} className='xl:text-xl hover:text-gray-400 ml-[6px]' onClick={()=>dispatch(getMobileView(hiddenmobileview))}>Tracker</Link>
               <Link to={"/contact"} className='xl:text-xl hover:text-gray-400 ml-[6px]'  onClick={()=>dispatch(getMobileView(hiddenmobileview))}>ContactUs</Link>
-              <Link className='xl:text-xl hover:text-gray-400 ml-[6px]'>Dropdown <i className="ri-arrow-drop-down-line"></i></Link>
+              <span>
+              <Link className='xl:text-xl hover:text-gray-400 ml-[6px]' onClick={handleDrop} >Dropdown <i className="ri-arrow-drop-down-line"></i></Link>
+              {drop !=='drop' && <Link className=' dark:bg-slate-600 p-1 relative rounded' onClick={()=>{handleReset();dispatch(getMobileView(hiddenmobileview));}}>{user!==null ? <span>Reset Password</span> : <span>Login Require</span> }</Link>}
+              </span>
+              
             </div>
 
             <form onSubmit={handleSearch} >
               <div className='flex flex-col'>
-                <input type='text' className='p-1 rounded  md:ml-[40px] md:w-[150px]  xl:ml-[60px] xl:w-[300px] dark:bg-slate-600 ' onChange={(e) => setSearch(e.target.value)} required />
+                <input type='text' className='p-1 rounded  md:ml-[40px] md:w-[150px] mt-4 mb-2  xl:ml-[60px] xl:w-[300px] dark:bg-slate-600 ' onChange={(e) => setSearch(e.target.value)} required />
 
                 {search.length > 0 ? <Link to={`/search/${search}`} className='xl:text-xl hover:text-gray-400 ml-[10px] '><button type='submit' onClick={()=>dispatch(getMobileView(hiddenmobileview))}>Search</button></Link> : <button type='submit' className='xl:text-xl hover:text-gray-400 ml-[10px] flex items-center'  onClick={()=>dispatch(getMobileView(hiddenmobileview))}>Search</button>}
 
@@ -101,6 +128,8 @@ const Navbar = () => {
         </ul>
         {logincross === "login" && <Login />}
         {signupcropss === "signup" && <Signup />}
+        {user !== null && (handlereset=== 'handlereset' && <PasswordReset />)}
+        {handleResetEmail === 'handleResetEmail' && <ResetForgetPassword /> }
       </div>
 
     </div>

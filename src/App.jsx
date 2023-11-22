@@ -1,6 +1,7 @@
 import './App.css'
 import Navbar from './components/navbar/Navbar'
 import {
+  BrowserRouter,
   HashRouter, // Import HashRouter instead of BrowserRouter
   Route,
   Routes
@@ -12,11 +13,13 @@ import Cart from './components/addcart/Cart'
 import Contact from './components/contact/Contact'
 import Search from './components/search/Search'
 import Tracker from './components/tracker/Tracker'
+import ResetPasswordWithUidToken from './components/forgetpassword/ResetPasswordWithUidToken'
+
 
 function App() {
   return (
     <div className='flex-col bg-gray-100 dark:bg-black dark:text-white h-min-[400px] h-auto fontfam'>
-      <HashRouter> {/* Use HashRouter instead of BrowserRouter */}
+      <BrowserRouter> {/* Use HashRouter instead of BrowserRouter */}
         <Navbar />
         <Routes>
           <Route exact path='/' element={<Home />} />
@@ -25,9 +28,10 @@ function App() {
           <Route exact path='/contact' element={<Contact />} />
           <Route exact path='/search/:search' element={<Search />} />
           <Route exact path='/tracker' element={<Tracker />} />
+          <Route exact path="resetpassworduidtoken/:id/:token" element={<ResetPasswordWithUidToken />} />
         </Routes>
         <Footer />
-      </HashRouter>
+      </BrowserRouter>
     </div>
   )
 }

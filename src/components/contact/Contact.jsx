@@ -12,7 +12,7 @@ const Contact = () => {
         <div className='margin'>
             <div className='text-4xl ml-10 mt-5'>Contact Us</div>
                 <form onSubmit={hanldeSubmit}>
-                <div className='ml-10 mt-5 flex flex-col  xl:w-[50%] lg:w-[80%] '>
+                <div className='md:ml-10 mt-5 flex flex-col  xl:w-[50%] lg:w-[80%] '>
                 <label htmlFor="name" className='mt-2 p-1 rounded text-lg'>Name</label>
                 <input  type="text" onChange={(e)=>dispatch({type:"NAME",value:e.target.value})}  className='mt-2 p-1 rounded text-lg  dark:bg-slate-600 ' />
                 <label htmlFor="email" className='mt-2 p-1 rounded text-lg'>Email</label>
