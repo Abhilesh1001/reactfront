@@ -4,8 +4,8 @@ export const userSlice = createSlice({
   name: 'userslice',
   initialState: {
     user : null,
-    // baseurl : 'https://abhileshkumar.pythonanywhere.com/', 
-    baseurl : 'http://127.0.0.1:8000/',
+    baseurl : 'https://abhileshkumar.pythonanywhere.com/', 
+    // baseurl : 'http://127.0.0.1:8000/',
     logincross : null,
     signupcropss : null,
     cart : localStorage.getItem('cart') === null ? {} : JSON.parse(localStorage.getItem('cart')) ,

@@ -19,7 +19,7 @@ import ResetPasswordWithUidToken from './components/forgetpassword/ResetPassword
 function App() {
   return (
     <div className='flex-col bg-gray-100 dark:bg-black dark:text-white h-min-[400px] h-auto fontfam'>
-      <BrowserRouter> {/* Use HashRouter instead of BrowserRouter */}
+      <HashRouter> {/* Use HashRouter instead of BrowserRouter */}
         <Navbar />
         <Routes>
           <Route exact path='/' element={<Home />} />
@@ -31,7 +31,7 @@ function App() {
           <Route exact path="resetpassworduidtoken/:id/:token" element={<ResetPasswordWithUidToken />} />
         </Routes>
         <Footer />
-      </BrowserRouter>
+      </HashRouter>
     </div>
   )
 }

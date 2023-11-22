@@ -47,15 +47,13 @@ const ResetPasswordWithUidToken = () => {
   return ( 
     <div className='w-full'>
         <div className='h-[650px]'>
-
-       
-
-   
     <div className='absolute w-full rounded top-[80px] '>    
     <div className='w-full flex items-center justify-center'>            
     <form className='border-2 border-slate-400 p-2 bg-slate-200 dark:bg-black relative rounded' onSubmit={handleSubmit}>
     <div className='flex justify-center w-full'>
             {loading && <Loading />}
+            {error && <div className="mt-2 bg-blue-300 rounded flex justify-center p-2 text-lg text-red-600">{error}</div>} 
+      {message && <div className="mt-2 bg-blue-300 rounded flex justify-center p-2 text-lg text-green-700">{message}</div>}
         </div>
         <label className="block"> 
             <label>Reset Form</label>
