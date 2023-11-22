@@ -17,7 +17,7 @@ const QuickView = () => {
     // console.log('data',scrollHeight,innerHeight,userTopHeight)
     const [isFixed, setIsFixed] = useState(false);
     const {width} = useWindowWidth()
-    console.log('width',width)
+
     useEffect(() => {
       if (userTopHeight >= 315) {
         setIsFixed(true);
@@ -43,9 +43,9 @@ const QuickView = () => {
                 {width>829 && (userTopHeight< 315 && <div className=' widthbackset m-4'></div>)}
                 {/* <div className='w-[900px] h-[200px] mt-4 pl-4' > */}
                 <div className='h-auto w-auto mt-4 pl-4'>
-                  <div className=' w-[60%] p-2 z-10 rounded'>
-                  <div className='text-3xl'>{data?.product_name}</div>
-                  <div className='text-xl'>Rs : {data?.price}</div>
+                  <div className='p-2 z-10 rounded'>
+                  <div className='text-3xl'>Phone: {data?.product_name}</div>
+                  <div className='text-xl'>Price Rs : {data?.price}</div>
                   <div className='text-xl'>{data?.desc}</div>
                   </div>
                   <Comment ProductID = {id} />

@@ -5,19 +5,18 @@ import {reducerReply,initialStatereplly} from '../../reducer/replyreducer'
 import { useSelector } from 'react-redux'
 
 const Comment = (ProductID) => {
-    const {user} = useSelector((state)=>state.user)
+    const {user,baseurl} = useSelector((state)=>state.user)
      const [display,setDisplay] = useState("hidden")
     const [datacomment, dispatchComment] = useReducer(reducer, initialState)
     const [replyId,setReplyId] = useState()
     const [dataReply,dispatchReply] = useReducer(reducerReply,initialStatereplly)
-    const { handleCommentSubmit, commentData, replyCommentData,handleReplySubmit } = useComment(ProductID, datacomment, dispatchComment,dataReply,dispatchReply)
+    const { handleCommentSubmit, commentData, replyCommentData,handleReplySubmit,profileData } = useComment(ProductID, datacomment, dispatchComment,dataReply,dispatchReply)
     function handleClick (e) {
-        console.log('ok')
-        console.log('data',e.target.id)
         setReplyId(e.target.id)
         setDisplay(`${display==="hidden"?"block":"hidden"}`)
-        console.log(display)
     }
+
+
 
     return (
         <div className='relative'>
@@ -34,12 +33,22 @@ const Comment = (ProductID) => {
                     <div className='relative '>
                         {
                             Object.keys(commentData)?.map((item, index) => {
-                                console.log(commentData[item].sno,item)
+                            
                                 return <div key={index}>
                                     <div>
                                         <div className=' flex'>
                                             <div className='w-20 h-20 mt-2 rounded mr-2 bg-red-100 flex flex-shrink-0 '>
+                                            <div className='w-[100%] items-center flex'>
+                                            {profileData?.map((items,indexs)=>{
+                                                                console.log(items.user ,commentData[item].userId)
+                                                                if(parseInt(items.user) === parseInt(commentData[item].userId)) {
+                                                                    return <div key={indexs} className=' w-full flex justify-center'>
+                                                                        <img src={`${baseurl}${items.profile_picture}`} className='w-[80%] rounded' alt="No Pic" />
+                                                                    </div>
+                                                                }
 
+                                                            })}
+                                            </div>
                                             </div>
                                             <div>
                                                 <div className=''>{commentData[item].user.charAt(0).toUpperCase() + commentData[item].user.slice(1) }</div>
@@ -53,9 +62,19 @@ const Comment = (ProductID) => {
 
                                             {
                                                 replyCommentData[commentData[item].sno]?.map((commentitem, indexes) => {
-                                                    // console.log(commentitem)
+                                                   
                                                     return <div key={indexes} className='flex'>
-                                                        <div className='w-20 h-20  bg-green-400 mt-2 rounded mr-4 flex lex-shrink-0' >
+                                                        <div className='w-20 h-20 justify-center items-center bg-green-400 mt-2 rounded mr-4 flex 
+                                                        lex-shrink-0' >
+                                                            {profileData?.map((item,index)=>{
+                                                                // console.log(item.user ,commentitem.userId)
+                                                                if(parseInt(item.user) === parseInt(commentitem.userId)) {
+                                                                    return <div key={index} className=' w-full flex justify-center'>
+                                                                        <img src={`${baseurl}${item.profile_picture}`} className='w-[80%] rounded' alt="No Pic" />
+                                                                    </div>
+                                                                }
+
+                                                            })}
 
                                                         </div>
                                                         <div>

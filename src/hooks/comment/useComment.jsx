@@ -8,7 +8,7 @@ export function useComment (ProductID,datacomment,dispatchComment,dataReply,disp
     const [commentData, setCommentData] = useState('')
     const [replyCommentData, setReplyCommentData] = useState('')
     // console.log('comment', commentData)
-
+    const [profileData,setProfileData] = useState()
     const handleCommentSubmit = async (e) => {
         e.preventDefault()
         
@@ -32,13 +32,18 @@ export function useComment (ProductID,datacomment,dispatchComment,dataReply,disp
 
     useEffect(() => {
         blogcomment()
+        profiePicture()
     }, [])
+
+
+     
+
 
     const blogcomment = async () => {
         try {
             const response = await axios.get(`${baseurl}blogcommentview/${ProductID?.ProductID}`)
             const res = response.data
-            // console.log(res)
+            console.log('response',res)
             let dataitem = []
             for (let data in res) {
                 dataitem.push(res[data])
@@ -56,7 +61,7 @@ export function useComment (ProductID,datacomment,dispatchComment,dataReply,disp
 
 
     const handleReplySubmit = async (e,commentid) => {
-        console.log(commentid, dataReply?.replyComment,)
+
  
         e.preventDefault()
         const parent = parseInt(commentid)
@@ -66,11 +71,11 @@ export function useComment (ProductID,datacomment,dispatchComment,dataReply,disp
             product: parseInt(ProductID.ProductID),
             parent: parent
         }
-        console.log('datareply',data)
+
         try {
             const response = await axios.post(`${baseurl}blogreply/`, data)
             const res = response.data
-            console.log(res)
+           
             blogcomment()
 
         } catch (error) {
@@ -79,5 +84,23 @@ export function useComment (ProductID,datacomment,dispatchComment,dataReply,disp
         dispatchReply({type : "REPLYCOMMENT",value : ""})
 
     }
-    return {handleCommentSubmit,commentData,replyCommentData,handleReplySubmit}
+
+    
+    const profiePicture = async () => {
+        try {
+            const response = await axios.get(`${baseurl}/cus/profile/`)
+            const res = response.data
+            // console.log(res)
+            setProfileData(res)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
+
+
+    return {handleCommentSubmit,commentData,replyCommentData,handleReplySubmit,profileData}
 }
