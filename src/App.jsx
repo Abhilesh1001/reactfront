@@ -14,11 +14,19 @@ import Contact from './components/contact/Contact'
 import Search from './components/search/Search'
 import Tracker from './components/tracker/Tracker'
 import ResetPasswordWithUidToken from './components/forgetpassword/ResetPasswordWithUidToken'
+import {} from 'react-redux'
+import { getSeatchItem } from './components/feature/user/userSlicer'
+import {useDispatch} from 'react-redux'
 
 
 function App() {
+  const dispatch = useDispatch()
+
+  const handleClick = ()=>{
+    dispatch(getSeatchItem(false))
+  }
   return (
-    <div className='flex-col bg-gray-100 dark:bg-black dark:text-white h-min-[400px] h-auto fontfam'>
+    <div onClick={handleClick} className='flex-col bg-gray-100 dark:bg-black dark:text-white h-min-[400px] h-auto fontfam'>
       <HashRouter> {/* Use HashRouter instead of BrowserRouter */}
         <Navbar />
         <Routes>

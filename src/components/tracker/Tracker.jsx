@@ -7,9 +7,10 @@ import useWindowWidth from '../../hooks/useWindowWidth'
 
 
 const Tracker = () => {
+
     const {width} = useWindowWidth()
     const { orderDetail, handleCheckOrder, handleSubmit, cartData, tracker, hanhlecheck, adress, handleProductDetails, adressData,product,productData,handleId,adressId,productDetailId } = useTracker()
-    const {baseurl} = useSelector((state)=>state.user)    
+    const {baseurl,user} = useSelector((state)=>state.user)    
     return (
         <div className='homecom' >
             <div className='margin'>
@@ -18,17 +19,22 @@ const Tracker = () => {
                         <div className='text-xl'>Order Details</div>
                         <table className='rounded'>
                             <thead>
-                                <tr className='bg-slate-400 rounded  dark:bg-gray-800'>
+                                {
+                                    user!== null ? (<tr className='bg-slate-400 rounded  dark:bg-gray-800'>
                                     <th>Order Id</th>
                                     {width>1218 && <th>Email</th>}
                                     <th>Order Details</th>
                                     <th>Adress</th>
                                     <th>Product Details</th>
+                                </tr>): <tr>
+                                    <th></th>
                                 </tr>
+                                }
+                                
                             </thead>
                             <tbody>
                                 {
-                                    orderDetail.length > 0 && orderDetail.map((item, index) => {
+                                   user !== null ? (orderDetail.length > 0 && orderDetail.map((item, index) => {
                                         return <tr key={index} className='bg-slate-200   dark:bg-gray-600'>
                                             <td className='p-1 mt-2 flex items-center justify-center'>{item?.order_id}</td>
 
@@ -41,7 +47,9 @@ const Tracker = () => {
 
                                             <td ><button className={` p-2 mt-2 mb-2 mr-2 rounded ${productDetailId === item?.order_id && product!=="null"?"bg-green-100":"bg-white"}  ${productDetailId === item?.order_id && product!=="null"?"dark:bg-sky-800":"dark:bg-black"}`} onClick={() => handleProductDetails(item?.order_id)}>{width>946 ? <div>Product Details</div>:<div>Check</div>}  </button></td>
                                         </tr>
-                                    })
+                                    })):<tr>
+                                        <td>Login to Track Your Orders</td>
+                                        </tr>
                                 }
                             </tbody>
                         </table>

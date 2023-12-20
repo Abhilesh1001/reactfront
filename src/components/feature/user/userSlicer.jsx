@@ -15,6 +15,7 @@ export const userSlice = createSlice({
     hiddenmobileview: 'hidden',
     handlereset : null,
     handleResetEmail : null,
+    searchItem : false,
   },
   reducers: {
     getUser : (state,action)=>{
@@ -88,14 +89,14 @@ export const userSlice = createSlice({
     },
     getHandleResetEmail : (state,action)=>{
       state.handleResetEmail = action.payload
+    },
+    getSeatchItem : (state,action)=>{
+      state.searchItem = action.payload
     }
-    
-
-
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { getUser,getLoginCross,getSignupCross,getCart,getRemove,getSum,getCartData,getEmptyData,getTotalSum,getToken,getMobileView,getHandleReset,getHandleResetEmail } = userSlice.actions
+export const { getUser,getLoginCross,getSignupCross,getCart,getRemove,getSum,getCartData,getEmptyData,getTotalSum,getToken,getMobileView,getHandleReset,getHandleResetEmail,getSeatchItem } = userSlice.actions
 
 export default userSlice.reducer

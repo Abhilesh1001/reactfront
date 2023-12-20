@@ -37,14 +37,16 @@ const orderDetails = async () => {
         const headers = {
             Authorization: `Bearer ${token}`
         };
-        try {
-            const response = await axios.post(`${baseurl}/newshop/orderDetail/`, emailData, { headers })
-            //   console.log(response.data)
-
-            setOrderDetails(response.data)
-
-        } catch (error) {
-            console.log(error)
+        if(user){
+            try {
+                const response = await axios.post(`${baseurl}/newshop/orderDetail/`, emailData, { headers })
+                //   console.log(response.data)
+    
+                setOrderDetails(response.data)
+    
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
 

@@ -4,7 +4,6 @@ import { useSearch } from '../../hooks/search/useSearch'
 import {useSelector} from 'react-redux'
 import AddCart from '../addcart/AddCart'
 import {Link} from 'react-router-dom'
-
 import useWindowWidth from '../../hooks/useWindowWidth'
 
 const Search = () => {
@@ -12,8 +11,6 @@ const Search = () => {
   const {data} = useSearch(search)
   const {baseurl} = useSelector((state)=>state.user)
   const {width} = useWindowWidth 
-
-
 
   return (
     <div className='homecom'>
